@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Person(name) {
+      this.name = name;
+    }
+    Person.prototype.getFrom = function () {
+      const state = 'Taiwan';
+      return `${this.name} from ${state}.`
+    }
+
+    const john = new Person('John')
+
+    console.log(john); // { name: 'John' }
+    console.log(john.getFrom()); // John from Taiwan.
+  </script>
+</body>
+
+</html>

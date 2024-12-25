@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+    <label for="throttle">
+      <input type="text" name="" id="throttle">
+    </label>
+  </div>
+  <script>
+    // method 1 : timer
+    function throttle1(fn, limit = 1000) {
+      let timer = null
+
+      return function () {
+        // 如果 timer 不存在，就執行 fn，並設定 timer 為 true，並在 limit 時間後設定 timer 為 null
+        if (!timer) {
+          fn.apply(this, arguments)
+          timer = true
+          setTimeout(() => { timer = null }, limit)
+        }
+      }
+    }
+
+    // method 2 : time
+    function throttle2(fn, limit = 1000) {
+      let prev = 0
+
+      return function () {
+        const now = Date.now() // 回傳當前的 timestamp（毫秒）
+
+        // 當前時間 - 上次執行時間 > 時間限制，就執行 fn，並更新上次執行時間
+        if (now - prev > limit) {
+          fn.apply(this, arguments)
+          prev = now
+        }
+      }
+    }
+
+    const getAPI = (val) => console.log(val)
+
+    const throttleGetAPI = throttle1(getAPI)
+    const inputThrottle = document.getElementById('throttle')
+
+    inputThrottle.addEventListener('input', function (e) {
+      throttleGetAPI(e.target.value)
+    })
+  </script>
+</body>
+
+</html>

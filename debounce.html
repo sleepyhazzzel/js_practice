@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+    <label for="debounce">
+      <input type="text" name="" id="debounce">
+    </label>
+  </div>
+  <script>
+    function getAPI(value) {
+      console.log(value)
+    }
+
+    function debounce(fn, delay = 500) {
+      let timer = null
+
+      return function () {
+        let context = this
+        let args = arguments // arguments is an array-like object
+
+        timer && clearTimeout(timer)
+
+        timer = setTimeout(() => {
+          fn.apply(context, args) // apply 回傳 function 執行結果
+        }, delay)
+      }
+    }
+
+    const debounceGetAPI = debounce(getAPI)
+    const inputDebounce = document.getElementById('debounce')
+
+    inputDebounce.addEventListener('input', function (e) {
+      debounceGetAPI(e.target.value)
+    })
+  </script>
+</body>
+
+</html>

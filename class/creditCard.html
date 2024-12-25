@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		class Card {
+			constructor(location, balance) {
+				this.location = location
+				this.balance = balance
+			}
+			static validateCardNumber(cardNumber) {
+				return cardNumber.length === 16
+			}
+			getBalance() {
+				return this.balance;
+			}
+		}
+
+		class JCB extends Card {
+			constructor(location, balance, branch, cardNumber) {
+				super(location, balance); // 調用父類的 constructor，將父類需要的參數傳遞過來。
+				this.branch = branch;
+				this.cardNumber = cardNumber;
+			}
+		}
+
+		// static 不用創建實例，就能調用
+		console.log(Card.validateCardNumber("1111222233334444"))// true
+		// 創建實例
+		let My_JCB_Card = new JCB("Taiwan", 1600, "taipei area", "1111222233334444")
+		// prototype 需先創建實例，才可調用
+		console.log(My_JCB_Card.getBalance()) // 1600
+		// 兩個class合併使用
+		console.log(Card.validateCardNumber(My_JCB_Card.cardNumber)) // true
+	</script>
+	<script>
+		class Book {
+			constuctor(name, price) {
+				this.name = name
+				this.price = price
+			}
+			basic() {
+				console.log(`${this.name} is ${this.price} dollars.`)
+			}
+		}
+
+		class Comic extends Book {
+			constructor(name, price, percent) {
+				// 在 constuctor 呼叫
+				super(name, price)
+				this.percent = percent
+			}
+			discont() {
+				super.basic()
+				console.log(`After discont, ${this.name} is ${this.price * this.percent} dollars.`)
+			}
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class Circle {
+      constructor(radius) {
+        this.radius = radius;
+      }
+
+      get area() {
+        return Circle.PI * this.radius * this.radius;
+      }
+
+      get circumference() {
+        return 2 * Circle.PI * this.radius;
+      }
+
+      static PI = 3.14159;
+    }
+
+    console.log(Circle.PI); // 3.14159
+    console.log(new Circle(10).area); // 314.159
+
+  </script>
+</body>
+
+</html>
